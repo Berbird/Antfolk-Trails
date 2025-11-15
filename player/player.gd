@@ -1,10 +1,12 @@
 extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const GRAVITY = 1000
+const GRAVITY = 1000  
 const SPEED = 180
+const JUMP = -200
+const JUMP_HORIZONTAL = 1000
 
-enum State { Idle, Run }
+enum State { Idle, Run, Jump }
 
 var current_state
 
@@ -16,10 +18,12 @@ func _process(delta):
 	player_falling(delta)
 	player_idle(delta)
 	player_run(delta)
+	player_jump(delta)
 	
 	move_and_slide()
 	
 	player_animations()
+	print("State: ", State.keys()[current_state])
 
 
 func player_falling(delta):
@@ -43,6 +47,18 @@ func player_run(delta):
 	if direction != 0:
 		current_state = State.Run
 		animated_sprite_2d.flip_h = false if direction > 0 else true
+
+
+func player_jump(delta):
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			current_state = State.Jump
+			velocity.y = JUMP
+	
+	if State.Jump:
+		if !is_on_floor():
+			var direction = Input.get_axis("move_left", "move_right")
+			velocity.x += direction * JUMP_HORIZONTAL * delta
 
 
 func player_animations():
