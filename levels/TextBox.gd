@@ -5,14 +5,23 @@ extends CanvasLayer
 @onready var label = $TextBoxContainer/MarginContainer/HBoxContainer/Label
 const CHAR_READ_RATE = 0.05
 var active_tween: Tween = null
+<<<<<<< Updated upstream
+=======
+var current_state = State.READY
+var text_queue = []
+>>>>>>> Stashed changes
 
 enum State{
 	READY,
 	READING,
 	FINISHED
 }
+<<<<<<< Updated upstream
 var current_state = State.READY
 var text_queue = []
+=======
+
+>>>>>>> Stashed changes
 func _ready() -> void:
 	hide_textbox()
 	queue_text("First text queued.")
