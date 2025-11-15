@@ -3,67 +3,71 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 const GRAVITY = 1000
-const SPEED = 180
-const JUMP = -200
-const JUMP_HORIZONTAL = 1000
+@export var speed : int = 180
+@export var jump : int = -200
+@export var jump_horizontal : int = 1000
 
 enum State { Idle, Run, Jump }
 
-var current_state
+var current_state : State
 
 func _ready():
-    current_state = State.Idle
+	current_state = State.Idle
 
-func _physics_process(delta):
-    player_falling(delta)
-    player_idle(delta)
-    player_run(delta)
-    player_jump(delta)
+func _physics_process(delta : float):
+	player_falling(delta)
+	player_idle(delta)
+	player_run(delta)
+	player_jump(delta)
 
-    move_and_slide()
+	move_and_slide()
 
-    player_animations()
+	player_animations()
 
-    print("State: ", State.keys()[current_state])
+	print("State: ", State.keys()[current_state])
 
-func player_falling(delta):
-    if !is_on_floor():
-        velocity.y += GRAVITY * delta
+func input_movement():
+	var direction : float = Input.get_axis("move_left", "move_right")
+	return direction
 
-func player_idle(delta):
-    if is_on_floor():
-        current_state = State.Idle
+func player_falling(delta : float):
+	if !is_on_floor():
+		velocity.y += GRAVITY * delta
 
-func player_run(delta):
-    var direction = Input.get_axis("move_left", "move_right")
+func player_idle(delta : float):
+	if is_on_floor():
+		current_state = State.Idle
 
-    if direction:
-        velocity.x = direction * SPEED
-    else:
-        velocity.x = move_toward(velocity.x, 0, SPEED)
+func player_run(delta : float):
+	var direction = input_movement()
 
-    if direction != 0:
-        current_state = State.Run
-        animated_sprite_2d.flip_h = false if direction > 0 else true
+	if direction:
+		velocity.x = direction * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
 
-func player_jump(delta):
-    if is_on_floor():
-        if Input.is_action_just_pressed("jump"):
-            current_state = State.Jump
-            velocity.y = JUMP
+	if direction != 0:
+		current_state = State.Run
+		animated_sprite_2d.flip_h = false if direction > 0 else true
 
-    if State.Jump:
-        if !is_on_floor():
-            var direction = Input.get_axis("move_left", "move_right")
-            velocity.x += direction * JUMP_HORIZONTAL * delta
+func player_jump(delta : float):
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			current_state = State.Jump
+			velocity.y = jump
+
+	if State.Jump:
+		if !is_on_floor():
+			var direction = input_movement()
+			velocity.x += direction * jump_horizontal * delta
 
 
 func player_animations():
-    if current_state == State.Idle:
-        animated_sprite_2d.play("idle")
-    elif current_state == State.Run and is_on_floor():
-        animated_sprite_2d.play("run")
-    elif current_state == State.Jump:
-        animated_sprite_2d.play("jump")
-    elif !is_on_floor():
-        animated_sprite_2d.play("fall")
+	if current_state == State.Idle:
+		animated_sprite_2d.play("idle")
+	elif current_state == State.Run and is_on_floor():
+		animated_sprite_2d.play("run")
+	elif current_state == State.Jump:
+		animated_sprite_2d.play("jump")
+	elif !is_on_floor():
+		animated_sprite_2d.play("fall")
