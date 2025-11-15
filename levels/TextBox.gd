@@ -6,6 +6,11 @@ extends CanvasLayer
 const CHAR_READ_RATE = 0.05
 var active_tween: Tween = null
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+var current_state = State.READY
+var text_queue = []
+>>>>>>> Stashed changes
 =======
 var current_state = State.READY
 var text_queue = []
@@ -17,8 +22,12 @@ enum State{
 	FINISHED
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 var current_state = State.READY
 var text_queue = []
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
