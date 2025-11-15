@@ -13,41 +13,37 @@ var current_state
 func _ready():
 	current_state = State.Idle
 
-
-func _process(delta):
+func _physics_process(delta):
 	player_falling(delta)
-	player_idle(delta)
+	player_idle()
 	player_run(delta)
+<<<<<<< HEAD
 	player_jump(delta)
 	
 	move_and_slide()
 	
+=======
+	move_and_slide() # no arguments in Godot 4
+>>>>>>> ac6fdd847bca5e6ffbf613c17a766ebba8624930
 	player_animations()
 	print("State: ", State.keys()[current_state])
-
 
 func player_falling(delta):
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 
-
-func player_idle(delta): # "delta" was used in the document/tutorial I followed. If this function still doesn't use delta at the end delete delta. 
-	if is_on_floor():
+func player_idle():
+	if is_on_floor() and velocity.x == 0:
 		current_state = State.Idle
-
 
 func player_run(delta):
 	var direction = Input.get_axis("move_left", "move_right")
-	
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
 	if direction != 0:
+		velocity.x = direction * SPEED
 		current_state = State.Run
-		animated_sprite_2d.flip_h = false if direction > 0 else true
-
+		animated_sprite_2d.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
 
 func player_jump(delta):
 	if is_on_floor():
@@ -66,4 +62,3 @@ func player_animations():
 		animated_sprite_2d.play("idle")
 	elif current_state == State.Run:
 		animated_sprite_2d.play("run")
-		
