@@ -1,10 +1,13 @@
 extends CharacterBody2D
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 const GRAVITY = 1000
 const SPEED = 180
+const JUMP = -200
+const JUMP_HORIZONTAL = 1000
 
-enum State { Idle, Run }
+enum State { Idle, Run, Jump }
 
 var current_state
 
@@ -13,30 +16,54 @@ func _ready():
 
 func _physics_process(delta):
 	player_falling(delta)
-	player_idle()
+	player_idle(delta)
 	player_run(delta)
-	move_and_slide() # no arguments in Godot 4
+	player_jump(delta)
+
+	move_and_slide()
+
 	player_animations()
+
+	print("State: ", State.keys()[current_state])
 
 func player_falling(delta):
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 
-func player_idle():
-	if is_on_floor() and velocity.x == 0:
+func player_idle(delta):
+	if is_on_floor():
 		current_state = State.Idle
 
 func player_run(delta):
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction != 0:
+
+	if direction:
 		velocity.x = direction * SPEED
-		current_state = State.Run
-		animated_sprite_2d.flip_h = direction < 0
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	if direction != 0:
+		current_state = State.Run
+		animated_sprite_2d.flip_h = false if direction > 0 else true
+
+func player_jump(delta):
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			current_state = State.Jump
+			velocity.y = JUMP
+
+	if State.Jump:
+		if !is_on_floor():
+			var direction = Input.get_axis("move_left", "move_right")
+			velocity.x += direction * JUMP_HORIZONTAL * delta
+
 
 func player_animations():
 	if current_state == State.Idle:
 		animated_sprite_2d.play("idle")
-	elif current_state == State.Run:
+	elif current_state == State.Run and is_on_floor():
 		animated_sprite_2d.play("run")
+	elif current_state == State.Jump:
+		animated_sprite_2d.play("jump")
+	elif !is_on_floor():
+		animated_sprite_2d.play("fall")
