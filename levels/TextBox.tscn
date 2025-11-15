@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx3pvimkhf5ap"]
+[gd_scene load_steps=4 format=3 uid="uid://cx3pvimkhf5ap"]
 
 [ext_resource type="FontFile" uid="uid://d316a2vcojylh" path="res://fonts/battlenet.ttf" id="1_t677d"]
+[ext_resource type="Script" uid="uid://6kic7sn4d7u0" path="res://levels/TextBox.gd" id="1_yxjbu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ss407"]
 bg_color = Color(0.004633617, 0.0040569683, 0.0023332706, 1)
@@ -11,9 +12,10 @@ border_width_bottom = 2
 border_color = Color(15.30028, 15.30028, 15.30028, 1)
 
 [node name="TextBox" type="CanvasLayer"]
+script = ExtResource("1_yxjbu")
 metadata/_edit_vertical_guides_ = [-580.0]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TextBoxContainer" type="MarginContainer" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -31,24 +33,24 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
+[node name="Panel" type="Panel" parent="TextBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ss407")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TextBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer"]
+[node name="Panel" type="Panel" parent="TextBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TextBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Start" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="Start" type="Label" parent="TextBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(9, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -57,18 +59,17 @@ theme_override_fonts/font = ExtResource("1_t677d")
 theme_override_font_sizes/font_size = 23
 text = "*"
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="TextBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(510, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("1_t677d")
 theme_override_font_sizes/font_size = 23
-text = "Hi. This is a sample text."
 autowrap_mode = 3
 clip_text = true
 
-[node name="End" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="End" type="Label" parent="TextBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(9, 0)
 layout_mode = 2
 size_flags_vertical = 8
