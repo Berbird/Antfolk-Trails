@@ -12,58 +12,58 @@ enum State { Idle, Run, Jump }
 var current_state
 
 func _ready():
-	current_state = State.Idle
+    current_state = State.Idle
 
 func _physics_process(delta):
-	player_falling(delta)
-	player_idle(delta)
-	player_run(delta)
-	player_jump(delta)
+    player_falling(delta)
+    player_idle(delta)
+    player_run(delta)
+    player_jump(delta)
 
-	move_and_slide()
+    move_and_slide()
 
-	player_animations()
+    player_animations()
 
-	print("State: ", State.keys()[current_state])
+    print("State: ", State.keys()[current_state])
 
 func player_falling(delta):
-	if !is_on_floor():
-		velocity.y += GRAVITY * delta
+    if !is_on_floor():
+        velocity.y += GRAVITY * delta
 
 func player_idle(delta):
-	if is_on_floor():
-		current_state = State.Idle
+    if is_on_floor():
+        current_state = State.Idle
 
 func player_run(delta):
-	var direction = Input.get_axis("move_left", "move_right")
+    var direction = Input.get_axis("move_left", "move_right")
 
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+    if direction:
+        velocity.x = direction * SPEED
+    else:
+        velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if direction != 0:
-		current_state = State.Run
-		animated_sprite_2d.flip_h = false if direction > 0 else true
+    if direction != 0:
+        current_state = State.Run
+        animated_sprite_2d.flip_h = false if direction > 0 else true
 
 func player_jump(delta):
-	if is_on_floor():
-		if Input.is_action_just_pressed("jump"):
-			current_state = State.Jump
-			velocity.y = JUMP
+    if is_on_floor():
+        if Input.is_action_just_pressed("jump"):
+            current_state = State.Jump
+            velocity.y = JUMP
 
-	if State.Jump:
-		if !is_on_floor():
-			var direction = Input.get_axis("move_left", "move_right")
-			velocity.x += direction * JUMP_HORIZONTAL * delta
+    if State.Jump:
+        if !is_on_floor():
+            var direction = Input.get_axis("move_left", "move_right")
+            velocity.x += direction * JUMP_HORIZONTAL * delta
 
 
 func player_animations():
-	if current_state == State.Idle:
-		animated_sprite_2d.play("idle")
-	elif current_state == State.Run and is_on_floor():
-		animated_sprite_2d.play("run")
-	elif current_state == State.Jump:
-		animated_sprite_2d.play("jump")
-	elif !is_on_floor():
-		animated_sprite_2d.play("fall")
+    if current_state == State.Idle:
+        animated_sprite_2d.play("idle")
+    elif current_state == State.Run and is_on_floor():
+        animated_sprite_2d.play("run")
+    elif current_state == State.Jump:
+        animated_sprite_2d.play("jump")
+    elif !is_on_floor():
+        animated_sprite_2d.play("fall")
