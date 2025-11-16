@@ -1,4 +1,4 @@
 # Antfolk Trails
 
-CS Girlies Hackathon 2025/
+CS Girlies Hackathon 2025
 
