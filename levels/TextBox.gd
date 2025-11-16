@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var start_symbol = $TextBoxContainer/MarginContainer/HBoxContainer/Start
 @onready var end_symbol = $TextBoxContainer/MarginContainer/HBoxContainer/End
 @onready var label = $TextBoxContainer/MarginContainer/HBoxContainer/Label
+@onready var player = $"../Player"
 const CHAR_READ_RATE = 0.05
 var active_tween: Tween = null
 var current_state = State.READY
@@ -13,19 +14,15 @@ enum State{
 	READING,
 	FINISHED
 }
-
-func _ready() -> void:
-	hide_textbox()
-	queue_text("First text queued.")
-	queue_text("Second text queued.")
-	queue_text("Third text queued.")
-	queue_text("Fourth text queued.")
 	
 func _process(delta: float) -> void:
 	match current_state:
 		State.READY:
 			if !text_queue.is_empty():
+				player.disable_movement()
 				display_text()
+			elif !player.can_move:
+				player.enable_movement()
 		State.READING:
 			if Input.is_action_just_pressed("ui_accept"):
 				label.visible_ratio = 1

@@ -10,7 +10,7 @@ const GRAVITY = 1000
 @export var max_jump_multiplier : float = 4.0 # Max jump height multiplier
 
 enum State { Idle, Run, Jump }
-
+var can_move = true
 var current_state : State
 var jump_charge : float = 0.0
 var is_charging_jump : bool = false
@@ -21,10 +21,10 @@ func _ready():
 func _physics_process(delta : float):
 	player_falling(delta)
 	player_idle(delta)
-	player_run(delta)
-	player_jump(delta)
-
-	move_and_slide()
+	if(can_move):
+		player_run(delta)
+		player_jump(delta)
+		move_and_slide()
 
 	player_animations()
 
@@ -83,3 +83,7 @@ func player_animations():
 		animated_sprite_2d.play("jump")
 	elif !is_on_floor():
 		animated_sprite_2d.play("fall")
+func disable_movement():
+	can_move = false
+func enable_movement():
+	can_move = true
