@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2jhau35ukd4v" path="res://ants/redharvesterant.tscn" id="4_5mrsh"]
 [ext_resource type="Texture2D" uid="uid://bhnt2f7e6i7k7" path="res://tileset/game_tilesets_3.png" id="4_vnv7o"]
 [ext_resource type="PackedScene" uid="uid://gj40rlr8lxds" path="res://levels/TextBox.tscn" id="5_safpt"]
-[ext_resource type="PackedScene" uid="uid://gqqw8fuguq7m" path="res://ants/redharvesterantnpc.tscn" id="8_rtcij"]
+[ext_resource type="PackedScene" uid="uid://dw7qthfd5kuql" path="res://ants/redharvesterantnpc.tscn" id="8_rtcij"]
 [ext_resource type="Texture2D" uid="uid://clelypynkgkgl" path="res://seed/seed1.png" id="9_rtcij"]
 [ext_resource type="AudioStream" uid="uid://dcj66pp57mfyi" path="res://levels/seedgather.mp3" id="10_ukwr8"]
 
@@ -291,6 +291,8 @@ shape = SubResource("RectangleShape2D_ukwr8")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(1144, 514)
+collision_layer = 16
+collision_mask = 2
 
 [node name="StorageRoom" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-5, -2)
@@ -309,3 +311,5 @@ volume_db = -15.0
 [connection signal="body_entered" from="Seed3/Area2D" to="." method="_on_area_2d_body_entered_seed3"]
 [connection signal="body_exited" from="Seed3/Area2D" to="." method="_on_area_2d_body_exited_seed3"]
 [connection signal="body_entered" from="Seed4/Area2D" to="." method="_on_area_2d_body_entered_seed4"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered_storage"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited_storage"]
