@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bvjiyaim5tta"]
+[gd_scene load_steps=27 format=3 uid="uid://bvjiyaim5tta"]
 
 [ext_resource type="Script" uid="uid://tquu62amqqb" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://cgfypnhx8h0r5" path="res://player/player-charge.png" id="2_g6k8r"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://pfsxx1ee0tsb" path="res://player/player-idle.png" id="2_yw30f"]
 [ext_resource type="Texture2D" uid="uid://rr416e0irb5h" path="res://player/player-run.png" id="3_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://bygfmxx8fkblh" path="res://player/player-jump.png" id="4_g6k8r"]
+[ext_resource type="AudioStream" uid="uid://btum5160v7s54" path="res://player/jump.mp3" id="7_boad6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wodsf"]
 atlas = ExtResource("2_g6k8r")
@@ -175,3 +176,7 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_boad6")
+
+[node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_boad6")
+volume_db = -25.0

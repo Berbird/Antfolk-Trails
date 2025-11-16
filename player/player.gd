@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sfx_jump: AudioStreamPlayer2D = $sfx_jump
 
 const GRAVITY = 1000
 @export var speed : int = 180
@@ -59,6 +60,7 @@ func player_jump(delta : float):
 		elif Input.is_action_just_pressed("jump"):
 			velocity.y = jump_base
 			velocity.x += jump_horizontal * delta
+			sfx_jump.play()
 		# Release jump
 		if is_charging_jump and Input.is_action_just_released("jump"):
 			current_state = State.Jump
@@ -66,6 +68,7 @@ func player_jump(delta : float):
 			velocity.y = jump_base * charge_multiplier
 			jump_charge = 0
 			is_charging_jump = false
+			sfx_jump.play()
 
 	# Allows horizontal movement in air
 	if current_state == State.Jump and !is_on_floor():
