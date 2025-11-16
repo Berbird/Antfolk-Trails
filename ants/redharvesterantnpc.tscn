@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://gqqw8fuguq7m"]
+
+[ext_resource type="Texture2D" uid="uid://uw4jk0hcjr8a" path="res://ants/red-harvester-ant-idle.png" id="1_2a6t5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l2hp"]
+atlas = ExtResource("1_2a6t5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhvrx"]
+atlas = ExtResource("1_2a6t5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdgse"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6l2hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhvrx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2iq0"]
+size = Vector2(10, 12)
+
+[node name="redharvesterantnpc" type="CharacterBody2D"]
+collision_layer = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_vdgse")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_v2iq0")

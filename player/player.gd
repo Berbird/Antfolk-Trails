@@ -6,8 +6,8 @@ const GRAVITY = 1000
 @export var speed : int = 180
 @export var jump_base : int = -200
 @export var jump_horizontal : int = 1000
-@export var max_charge_time : float = 5.0 # Maximum time you can hold for a charged jump
-@export var max_jump_multiplier : float = 4.0 # Max jump height multiplier
+@export var max_charge_time : float = 4.5 # Maximum time you can hold for a charged jump
+@export var max_jump_multiplier : float = 4.5 # Max jump height multiplier
 
 enum State { Idle, Run, Jump }
 var can_move = true
