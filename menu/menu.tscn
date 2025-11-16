@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp6bsvb0j7l7y"]
+
+[ext_resource type="Script" uid="uid://c4bigofr3vqqr" path="res://button_manager.gd" id="1_j0t7f"]
+[ext_resource type="Texture2D" uid="uid://casv7n711hgmw" path="res://menu/Background.png" id="1_juveg"]
+[ext_resource type="Texture2D" uid="uid://dor0i6bkyk4q7" path="res://menu/playbutton.png" id="3_v6yed"]
+[ext_resource type="Texture2D" uid="uid://c8c6fjiimm82x" path="res://menu/playbuttonhighlight.png" id="4_s4hbh"]
+[ext_resource type="Texture2D" uid="uid://qbthm2a25yk1" path="res://menu/quitbutton.png" id="5_6fswf"]
+[ext_resource type="Texture2D" uid="uid://epri46mdpsxp" path="res://menu/quitbuttonhighlight.png" id="6_bc54p"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(320, 179.99998)
+scale = Vector2(1.3333333, 1.3333333)
+texture = ExtResource("1_juveg")
+
+[node name="Button_manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_j0t7f")
+
+[node name="Start" type="TextureButton" parent="Button_manager"]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 46.0
+offset_right = 534.0
+offset_bottom = 69.0
+texture_normal = ExtResource("3_v6yed")
+texture_hover = ExtResource("4_s4hbh")
+
+[node name="Quit" type="TextureButton" parent="Button_manager"]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 76.0
+offset_right = 531.0
+offset_bottom = 98.0
+texture_normal = ExtResource("5_6fswf")
+texture_hover = ExtResource("6_bc54p")
+
+[connection signal="pressed" from="Button_manager/Start" to="Button_manager" method="_on_start_pressed"]
+[connection signal="pressed" from="Button_manager/Quit" to="Button_manager" method="_on_quit_pressed"]
