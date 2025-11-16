@@ -6,8 +6,8 @@ const GRAVITY = 1000
 @export var speed : int = 180
 @export var jump_base : int = -200
 @export var jump_horizontal : int = 1000
-@export var max_charge_time : float = 10.0 # Maximum time you can hold for a charged jump
-@export var max_jump_multiplier : float = 20.0 # Max jump height multiplier
+@export var max_charge_time : float = 5.0 # Maximum time you can hold for a charged jump
+@export var max_jump_multiplier : float = 4.0 # Max jump height multiplier
 
 enum State { Idle, Run, Jump }
 
@@ -52,10 +52,13 @@ func player_run(delta : float):
 func player_jump(delta : float):
 	if is_on_floor():
 		# Start charging jump
-		if Input.is_action_pressed("jump"):
+		if Input.is_action_pressed("jump") && velocity.x == 0:
 			is_charging_jump = true
 			jump_charge += delta
 			jump_charge = min(jump_charge, max_charge_time)
+		elif Input.is_action_just_pressed("jump"):
+			velocity.y = jump_base
+			velocity.x += jump_horizontal * delta
 		# Release jump
 		if is_charging_jump and Input.is_action_just_released("jump"):
 			current_state = State.Jump
@@ -70,7 +73,9 @@ func player_jump(delta : float):
 		velocity.x += direction * jump_horizontal * delta
 
 func player_animations():
-	if current_state == State.Idle:
+	if is_charging_jump && velocity.x == 0:
+		animated_sprite_2d.play("charge")
+	elif current_state == State.Idle:
 		animated_sprite_2d.play("idle")
 	elif current_state == State.Run and is_on_floor():
 		animated_sprite_2d.play("run")
