@@ -60,6 +60,6 @@ func _on_area_2d_body_entered_seed3(body: Node2D) -> void:
 
 
 func _on_area_2d_body_entered_seed4(body: Node2D) -> void:
-	$Seed3.visible = false         # Hides the seed
-	$Seed3/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
+	$Seed4.visible = false         # Hides the seed
+	$Seed4/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
 	count = count + 1

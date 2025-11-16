@@ -127,7 +127,6 @@ size = Vector2(34, 30)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_gjl0y")
-interaction_available = null
 
 [node name="InvisibleTile" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vnv7o")
@@ -262,16 +261,17 @@ position = Vector2(-6.914139e-05, -2.56)
 shape = SubResource("RectangleShape2D_ukwr8")
 
 [node name="Seed3" type="Sprite2D" parent="."]
-position = Vector2(788, 10.999999)
+position = Vector2(1303.0001, -38)
 scale = Vector2(0.875, 0.78125)
 texture = ExtResource("9_rtcij")
 
 [node name="Area2D" type="Area2D" parent="Seed3"]
+position = Vector2(1.1427174, 6.3999996)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Seed3/Area2D"]
-position = Vector2(-4.7683716e-07, -1.2799985)
+position = Vector2(0, -3.840004)
 shape = SubResource("RectangleShape2D_ukwr8")
 
 [node name="Seed4" type="Sprite2D" parent="."]
@@ -304,4 +304,3 @@ shape = SubResource("RectangleShape2D_rtcij")
 [connection signal="body_entered" from="Seed3/Area2D" to="." method="_on_area_2d_body_entered_seed3"]
 [connection signal="body_exited" from="Seed3/Area2D" to="." method="_on_area_2d_body_exited_seed3"]
 [connection signal="body_entered" from="Seed4/Area2D" to="." method="_on_area_2d_body_entered_seed4"]
-[connection signal="body_exited" from="Seed4/Area2D" to="." method="_on_area_2d_body_exited_seed4"]
