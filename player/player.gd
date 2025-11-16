@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sfx_jump: AudioStreamPlayer2D = $sfx_jump
-
 const GRAVITY = 1000
 @export var speed : int = 180
 @export var jump_base : int = -200
