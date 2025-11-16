@@ -3,6 +3,7 @@ extends Node2D
 @onready var redharvesterant = $redharvesterant
 @onready var textbox = $TextBox
 @onready var npc : CharacterBody2D = $redharvesterantnpc
+@export var count = 0
 var interaction_available = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,8 +16,8 @@ func _process(delta: float) -> void:
 		textbox.show_textbox()
 		textbox.queue_text("?...")  
 		textbox.queue_text("Who are you? What are you doing here?")  
-		textbox.queue_text("You smell just like us.")  
-		textbox.queue_text("Ooh.")  
+		textbox.queue_text("You smell just like us.")
+		textbox.queue_text("Ooh.")
 		textbox.queue_text("You must be a springtail imitating our pheromones.")  
 		textbox.queue_text("My grandpa once told me about you springtails. I know why you’re here.")  
 		textbox.queue_text("You springtails always live near our colonies.")  
@@ -34,8 +35,31 @@ func _process(delta: float) -> void:
  
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	interaction_available = true
-		
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	interaction_available = false
+
+
+func _on_area_2d_body_entered_seed1(body: Node2D) -> void:
+	$Seed1.visible = false         # Hides the seed
+	$Seed1/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
+	count = count + 1
+
+
+func _on_area_2d_body_entered_seed2(body: Node2D) -> void:
+	$Seed2.visible = false         # Hides the seed
+	$Seed2/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
+	count = count + 1
+
+
+func _on_area_2d_body_entered_seed3(body: Node2D) -> void:
+	$Seed3.visible = false         # Hides the seed
+	$Seed3/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
+	count = count + 1
+
+
+func _on_area_2d_body_entered_seed4(body: Node2D) -> void:
+	$Seed3.visible = false         # Hides the seed
+	$Seed3/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
+	count = count + 1
