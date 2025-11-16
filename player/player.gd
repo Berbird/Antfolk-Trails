@@ -4,12 +4,16 @@ extends CharacterBody2D
 
 const GRAVITY = 1000
 @export var speed : int = 180
-@export var jump : int = -200
+@export var jump_base : int = -200
 @export var jump_horizontal : int = 1000
+@export var max_charge_time : float = 10.0 # Maximum time you can hold for a charged jump
+@export var max_jump_multiplier : float = 20.0 # Max jump height multiplier
 
 enum State { Idle, Run, Jump }
 
 var current_state : State
+var jump_charge : float = 0.0
+var is_charging_jump : bool = false
 
 func _ready():
 	current_state = State.Idle
@@ -24,43 +28,46 @@ func _physics_process(delta : float):
 
 	player_animations()
 
-	print("State: ", State.keys()[current_state])
-
 func input_movement():
-	var direction : float = Input.get_axis("move_left", "move_right")
-	return direction
+	return Input.get_axis("move_left", "move_right")
 
 func player_falling(delta : float):
 	if !is_on_floor():
 		velocity.y += GRAVITY * delta
 
 func player_idle(delta : float):
-	if is_on_floor():
+	if is_on_floor() and not is_charging_jump:
 		current_state = State.Idle
 
 func player_run(delta : float):
 	var direction = input_movement()
 
-	if direction:
+	if direction != 0:
 		velocity.x = direction * speed
+		current_state = State.Run
+		animated_sprite_2d.flip_h = direction < 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
-	if direction != 0:
-		current_state = State.Run
-		animated_sprite_2d.flip_h = false if direction > 0 else true
-
 func player_jump(delta : float):
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump"):
+		# Start charging jump
+		if Input.is_action_pressed("jump"):
+			is_charging_jump = true
+			jump_charge += delta
+			jump_charge = min(jump_charge, max_charge_time)
+		# Release jump
+		if is_charging_jump and Input.is_action_just_released("jump"):
 			current_state = State.Jump
-			velocity.y = jump
+			var charge_multiplier = 1 + (jump_charge / max_charge_time) * (max_jump_multiplier - 1)
+			velocity.y = jump_base * charge_multiplier
+			jump_charge = 0
+			is_charging_jump = false
 
-	if State.Jump:
-		if !is_on_floor():
-			var direction = input_movement()
-			velocity.x += direction * jump_horizontal * delta
-
+	# Allows horizontal movement in air
+	if current_state == State.Jump and !is_on_floor():
+		var direction = input_movement()
+		velocity.x += direction * jump_horizontal * delta
 
 func player_animations():
 	if current_state == State.Idle:
