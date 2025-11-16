@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://4ufitfop0cql"]
+
+[ext_resource type="AudioStream" uid="uid://c3hlfg4m4bupi" path="res://menu/retrotheme.mp3" id="1_ydgsk"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer"]
+stream = ExtResource("1_ydgsk")
+volume_db = -40.0
+autoplay = true

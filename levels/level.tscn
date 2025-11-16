@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://echg78uiul8a"]
+[gd_scene load_steps=22 format=3 uid="uid://echg78uiul8a"]
 
 [ext_resource type="Texture2D" uid="uid://ci84vhturxrh1" path="res://tileset/game_tilesets_1.png" id="1_80vhd"]
 [ext_resource type="Texture2D" uid="uid://do43iuasyl7wl" path="res://tileset/game_tilesets_2.png" id="1_cwqvt"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://d2jhau35ukd4v" path="res://ants/redharvesterant.tscn" id="4_5mrsh"]
 [ext_resource type="Texture2D" uid="uid://bhnt2f7e6i7k7" path="res://tileset/game_tilesets_3.png" id="4_vnv7o"]
 [ext_resource type="PackedScene" uid="uid://gj40rlr8lxds" path="res://levels/TextBox.tscn" id="5_safpt"]
-[ext_resource type="PackedScene" uid="uid://dw7qthfd5kuql" path="res://ants/redharvesterantnpc.tscn" id="8_rtcij"]
+[ext_resource type="PackedScene" uid="uid://gqqw8fuguq7m" path="res://ants/redharvesterantnpc.tscn" id="8_rtcij"]
 [ext_resource type="Texture2D" uid="uid://clelypynkgkgl" path="res://seed/seed1.png" id="9_rtcij"]
+[ext_resource type="AudioStream" uid="uid://dcj66pp57mfyi" path="res://levels/seedgather.mp3" id="10_ukwr8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjl0y"]
 texture = ExtResource("1_80vhd")
@@ -294,6 +295,10 @@ position = Vector2(1144, 514)
 [node name="StorageRoom" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-5, -2)
 shape = SubResource("RectangleShape2D_rtcij")
+
+[node name="seed_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ukwr8")
+volume_db = -15.0
 
 [connection signal="body_entered" from="redharvesterantnpc/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="redharvesterantnpc/Area2D" to="." method="_on_area_2d_body_exited"]

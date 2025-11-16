@@ -4,6 +4,8 @@ extends Node2D
 @onready var textbox = $TextBox
 @onready var npc : CharacterBody2D = $redharvesterantnpc
 @export var count = 0
+@onready var seed_sfx: AudioStreamPlayer = $seed_sfx
+
 var interaction_available = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,24 +44,36 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_area_2d_body_entered_seed1(body: Node2D) -> void:
+	if $Seed1.visible:
+		seed_sfx.play()
 	$Seed1.visible = false         # Hides the seed
 	$Seed1/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
 	count = count + 1
+	
 
 
 func _on_area_2d_body_entered_seed2(body: Node2D) -> void:
+	if $Seed2.visible:
+		seed_sfx.play()
 	$Seed2.visible = false         # Hides the seed
 	$Seed2/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
 	count = count + 1
+	
 
 
 func _on_area_2d_body_entered_seed3(body: Node2D) -> void:
+	if $Seed3.visible:
+		seed_sfx.play()
 	$Seed3.visible = false         # Hides the seed
 	$Seed3/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
 	count = count + 1
+	
 
 
 func _on_area_2d_body_entered_seed4(body: Node2D) -> void:
+	if $Seed4.visible:
+		seed_sfx.play()
 	$Seed4.visible = false         # Hides the seed
 	$Seed4/Area2D/CollisionShape2D.disabled = true  # Turns off collisions
 	count = count + 1
+	

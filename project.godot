@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Antfolk Trails"
-run/main_scene="res://levels/level.tscn"
+run/main_scene="uid://dp6bsvb0j7l7y"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+
+[autoload]
+
+BgMusic="*res://menu/bg_music.tscn"
 
 [display]
 
