@@ -1,3 +1,88 @@
-[gd_scene format=3 uid="uid://d2jhau35ukd4v"]
+[gd_scene load_steps=12 format=3 uid="uid://d2jhau35ukd4v"]
 
-[node name="redharvesterant" type="Node2D"]
+[ext_resource type="Script" uid="uid://ce027vfqingg4" path="res://ants/redharvesterant.gd" id="1_5lisb"]
+[ext_resource type="Texture2D" uid="uid://uw4jk0hcjr8a" path="res://ants/red-harvester-ant-idle.png" id="1_i413i"]
+[ext_resource type="Texture2D" uid="uid://bbtxy6y4kmcy7" path="res://ants/red-harvester-ant-run.png" id="2_5lisb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lisb"]
+atlas = ExtResource("1_i413i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kea7d"]
+atlas = ExtResource("1_i413i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwthd"]
+atlas = ExtResource("2_5lisb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0647p"]
+atlas = ExtResource("2_5lisb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksxjl"]
+atlas = ExtResource("2_5lisb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmjsw"]
+atlas = ExtResource("2_5lisb")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7jd8"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lisb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kea7d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwthd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0647p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksxjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmjsw")
+}],
+"loop": true,
+"name": &"run",
+"speed": 24.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i413i"]
+size = Vector2(10, 13)
+
+[node name="redharvesterant" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_5lisb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_o7jd8")
+animation = &"run"
+autoplay = "idle"
+frame_progress = 0.20891473
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_i413i")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
