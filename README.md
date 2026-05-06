@@ -75,14 +75,14 @@ CS Girlies November Hackathon - Make Learning Cool Again!
 
 <img width="806" height="453" alt="image" src="https://github.com/user-attachments/assets/90bb0dd2-7a93-4d93-b784-5c0456076b1d" />
 
-
+---
 
 
 **A Quick Glance Into the Colony!**
 
 <img width="806" height="452" alt="image" src="https://github.com/user-attachments/assets/f59502fd-2721-4eb4-8e61-956179fd1a9c" />
 
-
+---
 
 
 **Another Image from the Colony**
