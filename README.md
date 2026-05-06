@@ -53,7 +53,7 @@ We'll add different habitats for each ant type so players can learn about the ma
 
 ## Try It Out
 
-- [GitHub Repo](https://github.com)
+- [Devpost](https://devpost.com/software/antfolk-trails)
 - [berbirds.itch.io](https://berbirds.itch.io)
 
 ## Submitted To
