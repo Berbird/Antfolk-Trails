@@ -51,10 +51,12 @@ We'll add different habitats for each ant type so players can learn about the ma
 - NC Music
 - NC Sound Effects
 
-## Try It Out
+## Check It Out
 
+- [Demo Video](https://www.youtube.com/watch?v=7lhG35p9U9U)
 - [Devpost](https://devpost.com/software/antfolk-trails)
 - [Itch.io](https://berbirds.itch.io)
+
 
 ## Submitted To
 
@@ -65,5 +67,33 @@ CS Girlies November Hackathon - Make Learning Cool Again!
 - **[@impap-byte](https://github.com/impap-byte)** - Worked on the game's narrative design and implemented core systems in Godot, including storyline logic and collision interactions
 - **[@emiruhan2](https://github.com/emiruhan2)** - Worked on project design and coding; first time using Godot with support from teammates
 - **[@Berbird](https://github.com/Berbird)** - Art designer and worked on the main scripts of the project
+
+
+## Gallery
+
+**Menu Screen**
+
+<img width="806" height="453" alt="image" src="https://github.com/user-attachments/assets/90bb0dd2-7a93-4d93-b784-5c0456076b1d" />
+
+
+---
+
+**A Quick Glance Into the Colony!**
+
+<img width="806" height="452" alt="image" src="https://github.com/user-attachments/assets/f59502fd-2721-4eb4-8e61-956179fd1a9c" />
+
+
+---
+
+**Another Image from the Colony**
+
+<img width="806" height="442" alt="image" src="https://github.com/user-attachments/assets/b259c625-9a01-4bfb-a9de-f3a6d42c07e6" />
+
+
+---
+
+
+
+
 
 
